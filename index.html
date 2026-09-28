@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basket Random - Online Multiplayer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#111">
+<link rel="stylesheet" href="style.css">
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111;touch-action:none}
+#br-lobby{position:fixed;inset:0;z-index:100000;background:rgba(10,10,15,.96);display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;color:#fff}
+#br-card{width:min(92vw,420px);box-sizing:border-box;padding:28px 22px;border-radius:18px;background:#1b1b23;box-shadow:0 16px 55px rgba(0,0,0,.45);text-align:center}
+#br-card h1{margin:0 0 8px;font-size:30px}.br-sub{opacity:.75;margin-bottom:20px}
+.br-btn{width:100%;border:0;border-radius:12px;padding:15px 16px;margin:7px 0;font-size:18px;font-weight:700;background:#fff;color:#111;touch-action:manipulation}
+.br-btn:active{transform:scale(.98)}
+#br-join-row{display:none;margin-top:6px}#br-code{box-sizing:border-box;width:100%;font-size:22px;padding:13px;border-radius:10px;border:1px solid #555;background:#111;color:#fff;text-align:center;letter-spacing:6px}
+#br-status{min-height:22px;margin-top:14px;font-size:14px;opacity:.9;white-space:pre-wrap}
+#br-role{margin-top:10px;font-weight:700}
+#br-controls{position:fixed;inset:0;z-index:99998;display:none;pointer-events:none}
+.br-zone{position:absolute;bottom:0;height:38vh;width:42vw;pointer-events:auto;background:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#br-p1-zone{left:0}#br-p2-zone{right:0}
+#br-guest-block{position:absolute;inset:0;background:transparent;pointer-events:auto}
+#br-guest-control{position:absolute;right:0;bottom:0;width:44vw;height:42vh;pointer-events:auto}
+#br-pill{position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:50%;transform:translateX(-50%);z-index:99999;display:none;padding:6px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font:700 12px Arial,sans-serif;pointer-events:none}
+</style>
+<script>
+window.addEventListener("keydown",function(e){if([32,37,38,39,40].indexOf(e.keyCode)>-1)e.preventDefault()},false);
+</script>
+</head>
+<body>
+<div id="br-lobby">
+  <div id="br-card">
+    <h1>Basket Random</h1>
+    <div class="br-sub">Two iPads • Original game • Online multiplayer</div>
+    <button id="br-create" class="br-btn">CREATE ROOM</button>
+    <button id="br-join-show" class="br-btn">JOIN ROOM</button>
+    <div id="br-join-row">
+      <input id="br-code" inputmode="numeric" maxlength="4" placeholder="ROOM CODE" autocomplete="off">
+      <button id="br-join" class="br-btn">JOIN</button>
+    </div>
+    <div id="br-status">Connecting to game server…</div>
+    <div id="br-role"></div>
+  </div>
+</div>
+<div id="br-pill"></div>
+<div id="br-controls">
+  <div id="br-p1-zone" class="br-zone" aria-hidden="true"></div>
+  <div id="br-p2-zone" class="br-zone" aria-hidden="true"></div>
+  <div id="br-guest-block" aria-hidden="true"></div>
+  <div id="br-guest-control" aria-hidden="true"></div>
+</div>
+<div id="fb-root"></div>
+<script src="box2d.wasm.js"></script>
+<noscript><div id="notSupportedWrap"><h2 id="notSupportedTitle">This content requires JavaScript</h2><p class="notSupportedMessage">JavaScript appears to be disabled.</p></div></noscript>
+<script src="scripts/supportcheck.js"></script>
+<script src="scripts/offlineclient.js"></script>
+<script src="scripts/main.js"></script>
+<script>if (navigator.serviceWorker) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(()=>{});</script>
+<script src="scripts/multiplayer-v7.js"></script>
+</body>
+</html>
